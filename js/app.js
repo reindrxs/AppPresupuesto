@@ -1,10 +1,11 @@
 let ingresosHTML="";
 let totalingresos=0;
-
+let egresosHTML="";
+let totalegresos=0;
 let agregarDato=(event)=>{
-    //event.preventdefault();
+    event.preventDefault();
 
- /*   let tipo = document.getElementById("tipo").value;
+    let tipo = document.getElementById("tipo").value;
     let descripcion = document.getElementById("descripcion").value;
     let valor = document.getElementById("valor").value;
 
@@ -19,16 +20,16 @@ let agregarDato=(event)=>{
             //hace otra cosa
         }
     }else{
-        alert("dbe completar todos los campos");
+        alert("debe completar todos los campos");
     }
-    */
+    
     console.log(tipo);
 }
 
 let cargaringresos = (descripcion, valor) =>{
     ingresosHTML +=crearingresosHTML(descripcion, valor);
     totalingresos+=valor; 
-    document,getElementById("totalingresos").textContent = formatearCLP(totalingresos);
+    document.getElementById("totalingresos").textContent = formatearCLP(totalingresos);
     document.getElementById("presupuesto").textContent = formatearCLP(totalingresos);
     document.getElementById("lista-ingresos").innerHTML=ingresosHTML;
 }
@@ -53,4 +54,27 @@ function formatearCLP(numero) {
         currency: 'CLP',
         minimumFractionDigits: 0
     }).format(numero);
+}
+
+let cargarEgresos = (descripcion, valor)=>{
+    egresosHTML +=crearingresosHTML(descripcion, valor);
+    totalegresos-=valor;
+    document.getElementById("totalegresos").textContent =formatearCLP(totalegresos);
+    document.getElementById("presupuesto").textContent =formatearCLP(totalegresos);
+    document.getElementById("lista-egresos").innerHTML=egresosHTML;
+}
+
+let crearegresosHTML =(descripcion,valor)=>{
+    return `<div class="elemento limpiarEstilos">
+    <div class="elemento_descripcion">${descripcion}</div>
+    <div class="derecha limpiarEstilos">
+        <div class="elemento_valor">${formatearCLP(valor)}</div>
+        <div class="elemento_eliminar">
+            <button class="elemento_eliminar--btn">
+                <ion-icon name="close-circle-outline"></ion-icon>
+            </button>
+        </div>
+    </div>
+</div>`;   
+
 }
